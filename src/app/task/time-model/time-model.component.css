@@ -1,0 +1,37 @@
+.card-header a {
+  color: #3e3f44;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.card-header a:hover {
+  color: #3e3f44;
+  text-decoration: none;
+}
+
+.fa {
+  float: left;
+  font-size: 24px;
+  margin: 0px 6px 0px 0px;
+  color: #0747a6 !important;
+}
+.modal {
+  background-color: rgba(18, 38, 63, 0.5);
+  z-index: 999;
+}
+.form-group {
+  margin-bottom: 0.5rem;
+}
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: unset;
+}
+.model-height{
+  height: 300px;
+}
+.test{
+  background-position: center center;
+  background-repeat: no-repeat;
+  height:26px;
+}
