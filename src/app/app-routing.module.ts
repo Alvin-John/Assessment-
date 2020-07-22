@@ -8,9 +8,8 @@ const routes: Routes = [];
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path:'', redirectTo:'Alvin/Task', pathMatch: 'full' },
-      { path: "Alvin/Task", component: TaskComponent },
-      
+      { path:'', redirectTo:'NOT-alvin-task', pathMatch: 'full' },
+      { path: "NOT-alvin-task", component: TaskComponent },
     ])
   ],
   exports: [ RouterModule ]

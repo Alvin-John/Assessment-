@@ -1,125 +1,195 @@
-<div class="container">
-<div class="card-body">
-   <div class="row">
-        <div class="col-8">
-            <div id="accordion">
-                <div class="card" *ngFor="let day of weekDays; let i=index">
-                    <div class="card-header" [id]="day">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#day'+i" aria-expanded="true"
-                            aria-controls="day"><strong>{{day.tile}}</strong>
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div [id]="'day'+i" class="collapse" [ngClass]="{show: day.is_show}" aria-labelledby="day" data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <button type="submit" class="btn btn-sm btn-primary" (click)="openModel(day.tile)">
-                                                <ng-container [ngSwitch]="day.tile">
-                                                    <ng-template [ngSwitchCase]="'Monday'">
-                                                        {{ isMonday.length > 0 ? 'Add more' : 'Add'}}
-                                                    </ng-template>
-                                                    <ng-template [ngSwitchCase]="'Tuesday'">
-                                                        {{isTuesday.length > 0 ? 'Add more' : 'Add'}}
-                                                    </ng-template>
-                                                    <ng-template [ngSwitchCase]="'Wednesday'">
-                                                        {{isWednesday.length > 0 ? 'Add more' : 'Add'}}
-                                                    </ng-template>
-                                                    <ng-template [ngSwitchCase]="'Thursday'">
-                                                        {{isThursday.length > 0 ? 'Add more' : 'Add'}}
-                                                    </ng-template>
-                                                    <ng-template [ngSwitchCase]="'Friday'">
-                                                        {{isFriday.length > 0? 'Add more' : 'Add'}}
-                                                    </ng-template>
-                                                </ng-container>
-                                            </button>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> 
-                            <table class="table table-sm table-nowrap card-table">
-                                <thead class="list">
-                                   <tr>
-                                      <th>
-                                         <a href="#" class="text-muted">
-                                            SNo
-                                         </a>
-                                      </th>
-                                      <th >
-                                         <a href="#" class="text-muted">
-                                            From
-                                         </a>
-                                      </th>
-                                      <th>
-                                         <a href="#" class="text-muted">
-                                            To
-                                         </a>
-                                      </th>
-                                   </tr>
-                                </thead>
-                                <tbody>
-                                    <ng-container *ngIf="day.tile == 'Monday'">
-                                        <tr *ngFor="let obj of isMonday; let i=index">
-                                            <td>{{i+1}}</td>
-                                            <td>{{obj.formtime}}</td>
-                                            <td>{{obj.totime}}</td>
-                                        </tr>
-                                    </ng-container>
-                                    <ng-container *ngIf="day.tile == 'Tuesday'">
-                                        <tr *ngFor="let obj of isTuesday; let i=index">
-                                            <td>{{i+1}}</td>
-                                            <td>{{obj.formtime}}</td>
-                                            <td>{{obj.totime}}</td>
-                                        </tr>
-                                    </ng-container>
-                                    <ng-container *ngIf="day.tile == 'Wednesday'">
-                                        <tr *ngFor="let obj of isWednesday; let i=index">
-                                            <td>{{i+1}}</td>
-                                            <td>{{obj.formtime}}</td>
-                                            <td>{{obj.totime}}</td>
-                                        </tr>
-                                    </ng-container>
-                                    <ng-container *ngIf="day.tile == 'Thursday'">
-                                        <tr  *ngFor="let obj of isThursday; let i=index">
-                                            <td>{{i+1}}</td>
-                                            <td>{{obj.formtime}}</td>
-                                            <td>{{obj.totime}}</td>
-                                        </tr>
-                                    </ng-container>
-                                    <ng-container *ngIf="day.tile == 'Friday'" >
-                                        <tr *ngFor="let obj of isFriday; let i=index">
-                                            <td>{{i+1}}</td>
-                                            <td>{{obj.formtime}}</td>
-                                            <td>{{obj.totime}}</td>
-                                        </tr>
-                                    </ng-container>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+<div class="loader d-flex justify-content-center" *ngIf="loaderOne">
+    <div class="spinner-border text-white d-flex align-self-center" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+<div class="main-content">
+<div class="container-fluid">
+    <div class="card">
+    <div class="card-header">
+        <div class="row mb-2">
+        <div class="col-auto d-flex align-self-center">
+            <h2><span class="fe fe-shield mr-2"></span>Custom Datatable</h2>
+        </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row px-3 py-0 ">
+        <div class="col-12 bg-light py-3">
+            <div class="row justify-content-between">
+            <div class="col-3">
+                <div class="row">
+                <div class="col-auto pr-0 pt-2">
+                    <label class="d-flex align-top">Show</label>
+                </div>
+                <div class="col-auto pr-0">
+                    <select (change)="pageCount($event.target.value)" name="example_length" aria-controls="example"
+                    class="form-control w-auto-select mx-2">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="col pt-2">
+                    <label class="d-flex align-top">entries</label>
+                </div>
                 </div>
             </div>
+            </div>
         </div>
-   </div>
-</div>
-</div>
-
-<div class="row">
-    <div class="col-6"></div>
-    <div class="col-2">
-        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Save</button>
+        </div>
+        <div class="row table-desktop">
+        <div class="col-md-12">
+            <div class="card-body">
+            <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="pointer">
+                <th class="w-5">
+                    #
+                </th>
+                <th class="w-5">
+                    Login User Name
+                </th>
+                <th class="w-5">
+                    Author Association
+                </th>
+                <th class="w-5">
+                    Created Date
+                </th>
+                </thead>
+                <tr *ngFor="let list of opportunityList; let i=index">
+                    <td>
+                        <span *ngIf="page!=1">{{add(i)}}</span><span *ngIf="page==1">{{i+1}}</span>
+                    </td>
+                    <td>
+                        {{(list.user != null) ? list.user.login : ''}}
+                    </td>
+                    <td>
+                        {{list.author_association}}
+                    </td>
+                    <td>
+                        {{list.created_at | date}}
+                    </td>
+                </tr>
+                <tbody>
+                </tbody>
+            </table>
+            </div>
+            </div>
+        </div>
+        </div>
     </div>
-    <div class="col-4"></div>
+    </div>
 </div>
+</div><br>
+<div class="main-content pb-4" *ngIf="opportunityListData.last_page">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-sm-5  d-flex align-self-center">
+            <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="dataTables_paginate paging_simple_numbers d-flex float-right pointer" id="example_paginate">
+            <ul class="pagination justify-content-end">
+                <li class="page-item" [ngClass]="{ disabled: opportunityListData.current_page === 1 }"
+                (click)="pageNumber(opportunityListData.current_page - 1)">
+                <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item" [ngClass]="{
+                    'active': opportunityListData.current_page == 1
+                }" *ngIf="
+                    opportunityListData.current_page !=
+                    opportunityListData.last_page
+                " (click)="pageNumber(1)">
+                <a class="page-link">1</a>
+                </li>
+                <li class="page-item" *ngIf="opportunityListData.current_page >= 5">
+                <a class="page-link">...</a>
+                </li>
+                <li class="page-item" *ngIf="opportunityListData.current_page >= 5"
+                (click)="pageNumber(opportunityListData.current_page - 1)">
+                <a class="page-link">{{
+                    opportunityListData.current_page - 1
+                }}</a>
+                </li>
+                <li class="page-item active bg-seconary" *ngIf="
+                    opportunityListData.current_page >= 5 &&
+                    opportunityListData.last_page !=
+                    opportunityListData.current_page
+                " (click)="pageNumber(opportunityListData.current_page)">
+                <a class="page-link">{{ opportunityListData.current_page }}</a>
+                </li>
+                <li class="page-item" *ngIf="
+                    opportunityListData.current_page >= 5 &&
+                    opportunityListData.current_page !=
+                    opportunityListData.last_page &&
+                    opportunityListData.current_page + 1 !=
+                    opportunityListData.last_page
+                " (click)="pageNumber(opportunityListData.current_page + 1)">
+                <a class="page-link">{{
+                    opportunityListData.current_page + 1
+                }}</a>
+                </li>
+                <li class="page-item" [ngClass]="{
+                    'active': opportunityListData.current_page == 2
+                }" *ngIf="
+                    opportunityListData.current_page < 5 &&
+                    opportunityListData.last_page > 2
+                " (click)="pageNumber(2)">
+                <a class="page-link">2</a>
+                </li>
+                <li class="page-item" [ngClass]="{
+                    'active': opportunityListData.current_page == 3
+                }" *ngIf="
+                    opportunityListData.current_page < 5 &&
+                    opportunityListData.last_page > 3
+                " (click)="pageNumber(3)">
+                <a class="page-link">3</a>
+                </li>
+                <li class="page-item" [ngClass]="{
+                    'active': opportunityListData.current_page == 4
+                }" *ngIf="
+                    opportunityListData.current_page < 5 &&
+                    opportunityListData.last_page > 4
+                " (click)="pageNumber(4)">
+                <a class="page-link">4</a>
+                </li>
+                <li class="page-item" [ngClass]="{
+                    'active': opportunityListData.current_page == 5
+                }" *ngIf="
+                    opportunityListData.current_page < 5 &&
+                    opportunityListData.last_page > 5
+                " (click)="pageNumber(5)">
+                <a class="page-link">5</a>
+                </li>
 
+                <li class="page-item" *ngIf="
+                    opportunityListData.last_page -
+                    opportunityListData.current_page >
+                    1 && opportunityListData.last_page > 5
+                ">
+                <a class="page-link">...</a>
+                </li>
 
-<ng-container *ngIf="isModelOpen">
-    <app-time-model [resource]="isPickedDay" (closeModalEvent)="modelClose()"
-    (sendBack)="success($event)">
-    </app-time-model>
-</ng-container>
-
+                <li class="page-item" [ngClass]="{
+                    'active':
+                    opportunityListData.current_page ==
+                    opportunityListData.last_page
+                }" (click)="pageNumber(opportunityListData.last_page)">
+                <a class="page-link">{{ opportunityListData.last_page }}</a>
+                </li>
+                <li class="page-item" [ngClass]="{
+                    disabled:
+                    opportunityListData.current_page ===
+                    opportunityListData.last_page
+                }" (click)="pageNumber(opportunityListData.current_page + 1)">
+                <a class="page-link">Next</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
