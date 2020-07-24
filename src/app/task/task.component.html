@@ -60,7 +60,8 @@
                 </thead>
                 <tr *ngFor="let list of opportunityList; let i=index">
                     <td>
-                        <span *ngIf="page!=1">{{add(i)}}</span><span *ngIf="page==1">{{i+1}}</span>
+                        <span *ngIf="page!=1">{{add(i)}}</span>
+                        <span *ngIf="page==1">{{i+1}}</span>
                     </td>
                     <td>
                         {{(list.user != null) ? list.user.login : ''}}

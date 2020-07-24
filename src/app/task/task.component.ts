@@ -39,13 +39,17 @@ export class TaskComponent implements OnInit {
         ) {
           this.opportunityListData.current_page = this.page;
           this.opportunityListData.last_page = Math.ceil(response.total_count/this.limit);
-          this.opportunityList = response.items;
+          let sortedData = response.items.sort((a, b) =>{
+            let isOrder = 'asc';
+            return compare(a.created_at, b.created_at, isOrder);
+          });
+          this.opportunityList = sortedData;
           console.log(this.opportunityListData);
           this.loaderOne = false;
         }
       });
-  
   }
+
   add(i) {
     var page = 1;
     if(this.page > 2) {
@@ -64,4 +68,8 @@ export class TaskComponent implements OnInit {
       this.loadData();
     }
   }
+}
+
+function compare(a: number | string, b: number | string, isAsc: any) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
